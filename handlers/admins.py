@@ -22,7 +22,7 @@ async def update_admin(client, message):
     for u in admins:
         new_ads.append(u.user.id)
     a[message.chat.id] = new_ads
-    await message.reply_text('Sucessfully updated admin list in **{}**'.format(message.chat.title))
+    await message.reply_text('`Admin listesi başarıyla güncellendi.` **{}**'.format(message.chat.title))
 
 
 
@@ -36,10 +36,10 @@ async def pause(_, message: Message):
     ) or (
             callsmusic.pytgcalls.active_calls[message.chat.id] == 'paused'
     ):
-        await message.reply_text("❗ Nothing is playing!")
+        await message.reply_text("`Durdurulacak herhangi bir şarkı bulunamadı!`")
     else:
         callsmusic.pytgcalls.pause_stream(message.chat.id)
-        await message.reply_text("▶️ Paused!")
+        await message.reply_text("`Bot durduruldu`")
 
 
 @Client.on_message(command("resume") & other_filters)
@@ -57,12 +57,12 @@ async def resume(_, message: Message):
         await message.reply_text("⏸ Resumed!")
 
 
-@Client.on_message(command("end") & other_filters)
+@Client.on_message(command("stop") & other_filters)
 @errors
 @authorized_users_only
 async def stop(_, message: Message):
     if message.chat.id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ Nothing is streaming!")
+        await message.reply_text("`Bot zaten çalışmıyor.`")
     else:
         try:
             callsmusic.queues.clear(message.chat.id)
@@ -70,7 +70,7 @@ async def stop(_, message: Message):
             pass
 
         callsmusic.pytgcalls.leave_group_call(message.chat.id)
-        await message.reply_text("❌ Stopped streaming!")
+        await message.reply_text("`Bot kapatıldı! Görüşürüüzzz😉❤️`")
 
 
 @Client.on_message(command("skip") & other_filters)
@@ -79,7 +79,7 @@ async def stop(_, message: Message):
 async def skip(_, message: Message):
     global que
     if message.chat.id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ Nothing is playing to skip!")
+        await message.reply_text("`Atlanacak şarkı bulunamadı!`")
     else:
         callsmusic.queues.task_done(message.chat.id)
 
