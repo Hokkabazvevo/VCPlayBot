@@ -160,7 +160,7 @@ def updated_stats(chat, queue, vol=100):
             stats += '\n\n'
             stats += 'Volume : {}%\n'.format(vol)
             stats += 'Songs in queue : `{}`\n'.format(len(que))
-            stats += 'Now Playing : **{}**\n'.format(queue[0][0])
+            stats += 'Oynatılıyor : **{}**\n'.format(queue[0][0])
             stats += 'Requested by : {}'.format(queue[0][1].mention)
     else:
         stats = None
@@ -181,11 +181,11 @@ def r_ply(type_):
                 
             ],
             [
-                InlineKeyboardButton('Playlist 📖', 'playlist'),
+                InlineKeyboardButton('Oynatma Listesi', 'playlist'),
                 
             ],
             [       
-                InlineKeyboardButton("❌ Close",'cls')
+                InlineKeyboardButton("Kapat ❌",'cls')
             ]        
         ]
     )
@@ -244,16 +244,16 @@ async def p_cb(b, cb):
         by = temp[0][1].mention(style='md')
         msg = "**Now Playing** in {}".format(cb.message.chat.title)
         msg += "\n- "+ now_playing
-        msg += "\n- Req by "+by
+        msg += "\n- Oynatan Kişi "+by
         temp.pop(0)
         if temp:
              msg += '\n\n'
-             msg += '**Queue**'
+             msg += '**Oynatma Listesi**'
              for song in temp:
                  name = song[0]
                  usr = song[1].mention(style='md')
                  msg += f'\n- {name}'
-                 msg += f'\n- Req by {usr}\n'
+                 msg += f'\n- Ekleyen Kişi {usr}\n'
         await cb.message.edit(msg)      
 
 @Client.on_callback_query(filters.regex(pattern=r'^(play|pause|skip|leave|puse|resume|menu|cls)$'))
