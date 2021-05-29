@@ -782,7 +782,7 @@ async def jiosaavn(client: Client, message_: Message):
             chat_id=message_.chat.id,
             reply_markup=keyboard,
             photo="final.png",
-            caption="{position} sıraya eklendi!",
+            caption=f"{position} sıraya eklendi!",
         
         )           
            
