@@ -36,10 +36,10 @@ async def pause(_, message: Message):
     ) or (
             callsmusic.pytgcalls.active_calls[message.chat.id] == 'paused'
     ):
-        await message.reply_text("`Durdurulacak herhangi bir şarkı bulunamadı!`")
+        await message.reply_text("`Durdurulacak şarkı bulunamadı!`")
     else:
         callsmusic.pytgcalls.pause_stream(message.chat.id)
-        await message.reply_text("`Bot durduruldu`")
+        await message.reply_text("`Bot durduruldu!`")
 
 
 @Client.on_message(command("resume") & other_filters)
@@ -51,10 +51,10 @@ async def resume(_, message: Message):
     ) or (
             callsmusic.pytgcalls.active_calls[message.chat.id] == 'playing'
     ):
-        await message.reply_text("❗ Nothing is paused!")
+        await message.reply_text("`Devam edilecek şarkı bulunamadı!`")
     else:
         callsmusic.pytgcalls.resume_stream(message.chat.id)
-        await message.reply_text("⏸ Resumed!")
+        await message.reply_text("`Şarkıya devam ediliyor...`")
 
 
 @Client.on_message(command("stop") & other_filters)
@@ -97,7 +97,7 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f'- Skipped **{skip[0]}**\n- Now Playing **{qeue[0][0]}**')
+    await message.reply_text(f'__{skip[0]}__ `Atlandı!`\n __{qeue[0][0]}__ `Çalınıyor`')
 
 
 @Client.on_message(
@@ -106,4 +106,4 @@ async def skip(_, message: Message):
 @errors
 async def admincache(client, message: Message):
     set(message.chat.id, [member.user for member in await message.chat.get_members(filter="administrators")])
-    #await message.reply_text("✯𝗩𝗖𝗣𝗹𝗮𝘆𝗕𝗼𝘁✯=❇️ Admin cache refreshed!")
+    #await message.reply_text("`Admin listesi başarıyla güncellendi!`")
