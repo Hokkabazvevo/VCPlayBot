@@ -476,7 +476,7 @@ async def play(_, message: Message):
         views = results[0]["views"]
 
     except Exception as e:
-        await lel.edit("Song not found.Try another song or maybe spell it properly.")
+        await lel.edit("`Şarkı bulunamadı!`")
         print(str(e))
         return
 
@@ -484,19 +484,19 @@ async def play(_, message: Message):
             [   
                 [
                                
-                    InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-                    InlineKeyboardButton('Menu ⏯ ', callback_data='menu')
+                    InlineKeyboardButton('Oynatma Listesi', callback_data='playlist'),
+                    InlineKeyboardButton('Menü', callback_data='menu')
                 
                 ],                     
                 [
                     InlineKeyboardButton(
-                        text="Watch On YouTube 🎬",
+                        text="YouTube'de Aç",
                         url=f"{url}")
 
                 ],
                 [       
                     InlineKeyboardButton(
-                        text="❌ Close",
+                        text="Kapat ❌",
                         callback_data='cls')
 
                 ]                             
@@ -533,7 +533,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo="final.png",
         reply_markup=keyboard,
-        caption="✯𝗩𝗖𝗣𝗹𝗮𝘆✯▶️ **Playing** here the song requested by {} 😜".format(
+        caption="**Oynatılıyor...** şarkı istenem kişi {}".format(
         message.from_user.mention()
         ),
     )
@@ -548,13 +548,13 @@ async def play(_, message: Message):
 )
 async def deezer(client: Client, message_: Message):
     global que
-    lel = await message_.reply("🔄 **Processing**")
+    lel = await message_.reply("`İşleme alınıyor...`")
     administrators = await get_administrators(message_.chat)
     chid = message_.chat.id
     try:
         user = await USER.get_me()
     except:
-        user.first_name =  "VCPlayBot"
+        user.first_name =  "MoolMusic"
     usar = user
     wew = usar.id
     try:
@@ -567,7 +567,7 @@ async def deezer(client: Client, message_: Message):
                               invitelink = await client.export_chat_invite_link(chid)
                           except:
                               await lel.edit(
-                                  "<b>Add me as admin of yor group first</b>",
+                                  "<b>Lütfen bana üye ekleme yetkisi ver🥺</b>",
                               )
                               return
 
@@ -575,7 +575,7 @@ async def deezer(client: Client, message_: Message):
                               await USER.join_chat(invitelink)
                               await USER.send_message(message_.chat.id,"I joined this group for playing music in VC")
                               await lel.edit(
-                                  "<b>@VCPlayRoBot userbot joined your chat</b>",
+                                  "<b>@MoolDjBot başarıyla grubunuza eklendi.</b>",
                               )
 
                           except UserAlreadyParticipant:
@@ -618,18 +618,18 @@ async def deezer(client: Client, message_: Message):
     keyboard = InlineKeyboardMarkup(
          [   
              [
-                 InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-                 InlineKeyboardButton('Menu ⏯ ', callback_data='menu')     
+                 InlineKeyboardButton('Oynatma Listesi', callback_data='playlist'),
+                 InlineKeyboardButton('Menü', callback_data='menu')     
              ],                     
              [
                  InlineKeyboardButton(
-                     text="Listen On Deezer 🎬",
+                     text="Deezer'da Açın 🎬",
                      url=f"{url}")
 
              ],
              [       
                  InlineKeyboardButton(
-                     text="❌ Close",
+                     text="Kapat ❌",
                      callback_data='cls')
 
             ]                      
@@ -649,7 +649,7 @@ async def deezer(client: Client, message_: Message):
         qeue.append(appendable)
         await res.edit_text(f"✯𝗩𝗖𝗣𝗹𝗮𝘆✯=#️⃣ Queued at position {position}")
     else:
-        await res.edit_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=▶️ Playing.....")
+        await res.edit_text("`Oynatılıyor...`")
         chat_id = message_.chat.id
         que[chat_id] = []
         qeue = que.get(message_.chat.id)
@@ -684,7 +684,7 @@ async def jiosaavn(client: Client, message_: Message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name =  "VCPlayBot"
+        user.first_name =  "Mool Music Bot"
     usar = user
     wew = usar.id
     try:
@@ -697,7 +697,7 @@ async def jiosaavn(client: Client, message_: Message):
                               invitelink = await client.export_chat_invite_link(chid)
                           except:
                               await lel.edit(
-                                  "<b>Add me as admin of yor group first</b>",
+                                  "<b>Bana üye ekleme yetkisi verin</b>",
                               )
                               return
 
@@ -705,7 +705,7 @@ async def jiosaavn(client: Client, message_: Message):
                               await USER.join_chat(invitelink)
                               await USER.send_message(message_.chat.id,"I joined this group for playing music in VC")
                               await lel.edit(
-                                  "<b>@VCPlayRobot helper userbot joined your chat</b>",
+                                  "<b>Destek Grubumuz @MoolRehber</b>",
                               )
 
                           except UserAlreadyParticipant:
@@ -713,8 +713,8 @@ async def jiosaavn(client: Client, message_: Message):
                           except Exception as e:
                               #print(e)
                               await lel.edit(
-                                  f"<b>🔴 Flood Wait Error 🔴 \nUser {user.first_name} couldn't join your group due to heavy requests for userbot! Make sure user is not banned in group."
-                                  "\n\nOr manually add @VCPlayRobot to your Group and try again</b>",
+                                  f"<b>🔴 Flood Wait Error 🔴 \nKullanıcı {user.first_name} gruba çok fazla katıldığı için eklenemiyor! Veya banlı olabilir."
+                                  "\n\nYa da @MoolDjBot manuel ekleyerek tekrar deneyin.</b>",
                               )
                               pass
     try:
@@ -752,17 +752,17 @@ async def jiosaavn(client: Client, message_: Message):
     keyboard = InlineKeyboardMarkup(
          [   
              [
-               InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-               InlineKeyboardButton('Menu ⏯ ', callback_data='menu')   
+               InlineKeyboardButton('Oynatma Listesi 📖', callback_data='playlist'),
+               InlineKeyboardButton('Menü', callback_data='menu')   
              ],                     
              [
                InlineKeyboardButton(
-                   text="Join Updates Channel",
-                   url='https://t.me/LaylaList')
+                   text="Destek Ve Duyuru Kanalı",
+                   url='https://t.me/MoolRehber')
              ],
              [       
                InlineKeyboardButton(
-                   text="❌ Close",
+                   text="Kapat",
                    callback_data='cls')
 
             ]                          
@@ -782,12 +782,12 @@ async def jiosaavn(client: Client, message_: Message):
             chat_id=message_.chat.id,
             reply_markup=keyboard,
             photo="final.png",
-            caption=f"✯𝗩𝗖𝗣𝗹𝗮𝘆✯=#️⃣ Queued at position {position}",
+            caption="{position} sıraya eklendi!",
         
         )           
            
     else:
-        await res.edit_text("✯𝗩𝗖𝗣𝗹𝗮𝘆✯=▶️ Playing.....")
+        await res.edit_text("Oynatılıyor...")
         chat_id = message_.chat.id
         que[chat_id] = []
         qeue = que.get(message_.chat.id)
@@ -804,7 +804,7 @@ async def jiosaavn(client: Client, message_: Message):
         chat_id=message_.chat.id,
         reply_markup=keyboard,
         photo="final.png",
-        caption=f"Playing {sname} Via Jiosaavn",
+        caption=f"{sname} Oynatılıyor...",
         
     )
     os.remove("final.png")
